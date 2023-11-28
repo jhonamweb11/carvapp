@@ -4,6 +4,8 @@
  */
 package interfaz;
 
+import Carvapp.Conexion;
+import Carvapp.Usuarios;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -19,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+     
     }
 
     /**
@@ -36,10 +39,10 @@ public class Login extends javax.swing.JFrame {
         iniciarsesion1 = new javax.swing.JLabel();
         usuariotxt = new javax.swing.JLabel();
         contrasenatxt = new javax.swing.JLabel();
-        campousuario = new javax.swing.JTextField();
+        Usuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        campocontrasena = new javax.swing.JPasswordField();
+        Contrasena = new javax.swing.JPasswordField();
         botonIngreso = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         fondoregistro = new javax.swing.JLabel();
@@ -74,34 +77,34 @@ public class Login extends javax.swing.JFrame {
         contrasenatxt.setText("Contraseña");
         bg.add(contrasenatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 120, 30));
 
-        campousuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campousuario.setForeground(new java.awt.Color(204, 204, 204));
-        campousuario.setText("Ingrese su nombre de usuario");
-        campousuario.setBorder(null);
-        campousuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        Usuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Usuario.setForeground(new java.awt.Color(204, 204, 204));
+        Usuario.setText("Ingrese su nombre de usuario");
+        Usuario.setBorder(null);
+        Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                campousuarioMousePressed(evt);
+                UsuarioMousePressed(evt);
             }
         });
-        campousuario.addActionListener(new java.awt.event.ActionListener() {
+        Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campousuarioActionPerformed(evt);
+                UsuarioActionPerformed(evt);
             }
         });
-        bg.add(campousuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 320, 40));
+        bg.add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 320, 40));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 300, 20));
         bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 300, 20));
 
-        campocontrasena.setForeground(new java.awt.Color(204, 204, 204));
-        campocontrasena.setText("********");
-        campocontrasena.setBorder(null);
-        campocontrasena.setCaretColor(new java.awt.Color(204, 204, 204));
-        campocontrasena.addMouseListener(new java.awt.event.MouseAdapter() {
+        Contrasena.setForeground(new java.awt.Color(204, 204, 204));
+        Contrasena.setText("********");
+        Contrasena.setBorder(null);
+        Contrasena.setCaretColor(new java.awt.Color(204, 204, 204));
+        Contrasena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                campocontrasenaMousePressed(evt);
+                ContrasenaMousePressed(evt);
             }
         });
-        bg.add(campocontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 280, 30));
+        bg.add(Contrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 280, 30));
 
         botonIngreso.setBackground(new java.awt.Color(127, 231, 82));
         botonIngreso.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -111,6 +114,11 @@ public class Login extends javax.swing.JFrame {
         botonIngreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonIngresoMouseClicked(evt);
+            }
+        });
+        botonIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIngresoActionPerformed(evt);
             }
         });
         bg.add(botonIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 180, 40));
@@ -144,36 +152,42 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonIngresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresoMouseClicked
-         javax.swing.JOptionPane.showMessageDialog(this,"intento de login; \nUsuario: " + campousuario.getText()+ "\nContraseña: " + String.valueOf(campocontrasena.getPassword()),"LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE );        // TODO add your handling code here:
+        // javax.swing.JOptionPane.showMessageDialog(this,"intento de login; \nUsuario: " + Usuario.getText()+ "\nContraseña: " + String.valueOf(Contrasena.getPassword()),"LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE );        // TODO add your handling code here:
    
     }//GEN-LAST:event_botonIngresoMouseClicked
 
-    private void campousuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campousuarioActionPerformed
+    private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campousuarioActionPerformed
+    }//GEN-LAST:event_UsuarioActionPerformed
 
-    private void campousuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campousuarioMousePressed
-       if(campousuario.getText().equals("Ingrese su nombre de usuario")){
-        campousuario.setText("");
-        campousuario.setForeground(Color.black);
+    private void UsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuarioMousePressed
+       if(Usuario.getText().equals("Ingrese su nombre de usuario")){
+        Usuario.setText("");
+        Usuario.setForeground(Color.black);
        }
-        if (String.valueOf(campocontrasena.getPassword()).isEmpty()){
-        campocontrasena.setText("********");
-        campocontrasena.setForeground(Color.gray);
+        if (String.valueOf(Contrasena.getPassword()).isEmpty()){
+        Contrasena.setText("********");
+        Contrasena.setForeground(Color.gray);
         }
-    }//GEN-LAST:event_campousuarioMousePressed
+    }//GEN-LAST:event_UsuarioMousePressed
 
-    private void campocontrasenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campocontrasenaMousePressed
-      if (String.valueOf(campocontrasena.getPassword()).equals("********")){
-        campocontrasena.setText("");
-        campocontrasena.setForeground(Color.black);
+    private void ContrasenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContrasenaMousePressed
+     if (String.valueOf(Contrasena.getPassword()).equals("********")){
+        Contrasena.setText("");
+        Contrasena.setForeground(Color.black);
       }
-      if(campousuario.getText().isEmpty()){
-        campousuario.setText("Ingrese su nombre de usuario");
-       campousuario.setForeground(Color.gray);
-    }//GEN-LAST:event_campocontrasenaMousePressed
+      if(Usuario.getText().isEmpty()){
+        Usuario.setText("Ingrese su nombre de usuario");
+       Usuario.setForeground(Color.gray);
+      }
+    }//GEN-LAST:event_ContrasenaMousePressed
 
-    }
+    private void botonIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresoActionPerformed
+        Usuarios objetoLogin = new Usuarios();
+       objetoLogin.validarUsuario(Usuario, Contrasena);
+    }//GEN-LAST:event_botonIngresoActionPerformed
+
+    
     
     
     /**
@@ -212,11 +226,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField Contrasena;
+    private javax.swing.JTextField Usuario;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel bienvenida;
     private javax.swing.JButton botonIngreso;
-    private javax.swing.JPasswordField campocontrasena;
-    private javax.swing.JTextField campousuario;
     private javax.swing.JLabel contrasenatxt;
     private javax.swing.JLabel fondoregistro;
     private javax.swing.JLabel iniciarsesion1;

@@ -6,6 +6,8 @@ package Carvapp;
 
 import interfaz.AgregarVisitante;
 import interfaz.Login;
+import interfaz.Menu;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -15,10 +17,13 @@ public class Principal {
     public static void main(String[] args) {
                 
         Login objectLogin = new Login();
-       objectLogin.setVisible(false);
+       objectLogin.setVisible(true);
+                  
+       Menu menuPrincipal = new Menu();
+       menuPrincipal.setVisible(false);
        
-       AgregarVisitante objectCrud = new AgregarVisitante();
-       objectCrud.setVisible(true);
+       
+      
         
     }
 }

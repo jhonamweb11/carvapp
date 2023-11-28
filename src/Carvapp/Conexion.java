@@ -13,6 +13,10 @@ import java.sql.DriverManager;
  * @author Usuario
  */
 public class Conexion {
+
+    public static com.mysql.jdbc.Connection obtenerConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     Connection conectar = null;
     String usuario = "admin";
     String contrasena = "xiS69t@JSI!vJ7rx";

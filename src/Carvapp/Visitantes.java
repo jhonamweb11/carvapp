@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Carvapp;
+import interfaz.RegistroVisitas;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
@@ -240,6 +242,131 @@ public class Visitantes {
                
            }
     
+           public void mostrarRegistros(JTable paramTablaRegistroVisitantes ){
+            Conexion objetoConexion = new Conexion();
+            DefaultTableModel modelo = new DefaultTableModel();
+            
+            TableRowSorter<TableModel> OrdenarTabla = new TableRowSorter<TableModel>(modelo);
+            paramTablaRegistroVisitantes.setRowSorter(OrdenarTabla);
+            String sql="";
+            
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellido");
+           modelo.addColumn("Documento");
+            modelo.addColumn("Rol");
+            modelo.addColumn("Fecha Entrada");
+            modelo.addColumn("Hora Entrada");
+            modelo.addColumn("Fecha Salida");
+            modelo.addColumn("Hora Salida");
+             modelo.addColumn("Estado");
+            modelo.addColumn("RegistroID");
+            
+            paramTablaRegistroVisitantes.setModel (modelo);
+            
+            
+            sql = "SELECT vi.VisitanteID, vi.Nombre, vi.Apellido, vi.documento, vi.Rol, re.FechaEntrada, re.HoraEntrada, re.FechaSalida, re.HoraSalida, re.Estado, re.RegistroID FROM visitantes vi LEFT JOIN  registros re ON vi.VisitanteID = re.VisitanteID";
+            
+            String [] datos = new String [11];
+            Statement st;
+            
+            
+            try {
+                st = objetoConexion.establecerConexion().createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
+                while (rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    datos[4] = rs.getString(5);
+                    datos[5] = rs.getString(6);
+                    datos[6] = rs.getString(7);
+                    datos[7] = rs.getString(8);
+                    datos[8] = rs.getString(9);
+                    datos[9] = rs.getString(10);
+                    datos[10] = rs.getString(11);
+                    modelo.addRow(datos);                    
+                }
+                paramTablaRegistroVisitantes.setModel(modelo);
+            
+            
+                 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros, Error:"+e.toString());
+            }
+        }
+           
+  
+           public void SeleccionarRegistro(JTable paramTablaRegistroVisitantes, JTextField paramVisitanteID, JTextField paramNombre, JTextField paramDocumento, JTextField paramRegistroID) {
+    try {
+        int fila = paramTablaRegistroVisitantes.getSelectedRow();
+
+        if (fila >= 0) {
+            paramVisitanteID.setText(String.valueOf(paramTablaRegistroVisitantes.getValueAt(fila, 0)));
+            paramNombre.setText(String.valueOf(paramTablaRegistroVisitantes.getValueAt(fila, 1)));
+            paramDocumento.setText(String.valueOf(paramTablaRegistroVisitantes.getValueAt(fila, 3)));
+            paramRegistroID.setText(String.valueOf(paramTablaRegistroVisitantes.getValueAt(fila, 10)));
+        } else {
+            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error de selección: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+           
+           
+        public void mostrarVisitantesActivos(JTable paramTablaVisitantesActivos){
+            Conexion objetoConexion = new Conexion();
+            DefaultTableModel modelo = new DefaultTableModel();
+            
+            TableRowSorter<TableModel> OrdenarTabla = new TableRowSorter<TableModel>(modelo);
+            paramTablaVisitantesActivos.setRowSorter(OrdenarTabla);
+            String sql="";
+            
+           
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellido");
+           modelo.addColumn("Documento");
+            
+             modelo.addColumn("Estado");
+            
+            
+            paramTablaVisitantesActivos.setModel (modelo);
+            
+            
+            sql = "SELECT vi.Nombre,vi.Apellido, vi.Documento, re.Estado FROM Visitantes AS vi JOIN Registros AS re ON vi.VisitanteID = re.VisitanteID WHERE re.Estado = 'I'";
+            
+            String [] datos = new String [11];
+            Statement st;
+            
+            
+            try {
+                st = objetoConexion.establecerConexion().createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
+                while (rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                
+                    modelo.addRow(datos);                    
+                }
+                paramTablaVisitantesActivos.setModel(modelo);
+            
+            
+                 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros, Error:"+e.toString());
+            }
+        }
+        
+     
+           
 }
         
       
